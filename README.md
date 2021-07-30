@@ -1,14 +1,20 @@
 # NAME
 
-MooX::MouseTypeConstraints - It's new $module
+MooX::MouseTypeConstraints - Mouse type containts for Moo
 
 # SYNOPSIS
 
+    use Moo;
     use MooX::MouseTypeConstraints;
+
+    has bar => (
+        is  => 'ro',
+        isa => 'Int', # make it as Mouse::Meta::TypeContraints validator
+    );
 
 # DESCRIPTION
 
-MooX::MouseTypeConstraints is ...
+MooX::MouseTypeConstraints provides [Mouse](https://metacpan.org/pod/Mouse) type containts support for [Moo](https://metacpan.org/pod/Moo).
 
 # LICENSE
 

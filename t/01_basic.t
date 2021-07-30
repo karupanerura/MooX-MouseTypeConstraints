@@ -33,7 +33,7 @@ eval {
     my $foo = Foo->new(bar => 1);
     my $bar = Bar->new(foo => $foo);
 };
-is $@, '', 'should not fail  construct';
+is $@, '', 'should not fail construct';
 
 eval {
     my $foo = Foo->new(bar => 'invalid');

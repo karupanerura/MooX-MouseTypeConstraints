@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Mouse type containts for Moo",
    "author" : [
       "karupanerura <karupa@cpan.org>"
    ],
@@ -42,16 +42,30 @@
       },
       "runtime" : {
          "requires" : {
+            "B::Hooks::EndOfScope" : "0",
+            "Mouse::Util::TypeConstraints" : "0",
             "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
+            "Moo" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/karupanerura/MooX-MouseTypeConstraints/issues"
+      },
+      "homepage" : "https://github.com/karupanerura/MooX-MouseTypeConstraints",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/karupanerura/MooX-MouseTypeConstraints.git",
+         "web" : "https://github.com/karupanerura/MooX-MouseTypeConstraints"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:KARUPA",
    "x_serialization_backend" : "JSON::PP version 4.04",

@@ -53,15 +53,21 @@ __END__
 
 =head1 NAME
 
-MooX::MouseTypeConstraints - It's new $module
+MooX::MouseTypeConstraints - Mouse type containts for Moo
 
 =head1 SYNOPSIS
 
+    use Moo;
     use MooX::MouseTypeConstraints;
+
+    has bar => (
+        is  => 'ro',
+        isa => 'Int', # make it as Mouse::Meta::TypeContraints validator
+    );
 
 =head1 DESCRIPTION
 
-MooX::MouseTypeConstraints is ...
+MooX::MouseTypeConstraints provides L<Mouse> type containts support for L<Moo>.
 
 =head1 LICENSE
 
