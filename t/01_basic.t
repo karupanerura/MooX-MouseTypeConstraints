@@ -19,15 +19,15 @@ is $@, '', 'should not fail when declaring';
 eval {
     package Bar;
 
-    use Moo;
     use MooX::MouseTypeConstraints;
+    use Moo;
 
     has foo => (
         is  => 'ro',
         isa => 'Foo',
     );
 };
-is $@, '', 'should works it again';
+is $@, '', 'should works regardless of the order of "use"';
 
 eval {
     my $foo = Foo->new(bar => 1);

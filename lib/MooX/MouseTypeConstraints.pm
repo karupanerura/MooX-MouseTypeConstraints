@@ -5,30 +5,33 @@ use warnings;
 
 our $VERSION = "0.01";
 
+use B::Hooks::EndOfScope;
 use Mouse::Util::TypeConstraints ();
 
 sub import {
     my $class = shift;
     my $target = caller;
 
-    my $has = $target->can('has');
-    my $code = sub {
-        my ($name, %args) = @_;
-        if (exists $args{isa} && !ref $args{isa}) {
-            my $type = Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint($args{isa});
-            $args{isa} = sub {
-                die $type->get_message(@_) unless $type->check(@_);
-            };
-        }
-        @_ = ($name, %args);
-        goto $has;
-    };
+    on_scope_end {
+        my $has = $target->can('has');
+        my $code = sub {
+            my ($name, %args) = @_;
+            if (exists $args{isa} && !ref $args{isa}) {
+                my $type = Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint($args{isa});
+                $args{isa} = sub {
+                    die $type->get_message(@_) unless $type->check(@_);
+                };
+            }
+            @_ = ($name, %args);
+            goto $has;
+        };
 
-    my $glob = "${target}::has";
-    {
-        no strict qw/refs/;
-        no warnings qw/prototype redefine/;
-        *{$glob} = $code;
+        my $glob = "${target}::has";
+        {
+            no strict qw/refs/;
+            no warnings qw/prototype redefine/;
+            *{$glob} = $code;
+        };
     };
 }
 
