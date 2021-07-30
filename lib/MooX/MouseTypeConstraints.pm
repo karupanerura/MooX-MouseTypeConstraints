@@ -53,7 +53,7 @@ __END__
 
 =head1 NAME
 
-MooX::MouseTypeConstraints - Mouse type containts for Moo
+MooX::MouseTypeConstraints - Mouse type constraints for Moo
 
 =head1 SYNOPSIS
 
@@ -67,7 +67,7 @@ MooX::MouseTypeConstraints - Mouse type containts for Moo
 
 =head1 DESCRIPTION
 
-MooX::MouseTypeConstraints provides L<Mouse> type containts support for L<Moo>.
+MooX::MouseTypeConstraints provides L<Mouse> type constraints support for L<Moo>.
 
 =head1 LICENSE
 

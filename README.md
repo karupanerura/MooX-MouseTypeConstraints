@@ -1,6 +1,6 @@
 # NAME
 
-MooX::MouseTypeConstraints - Mouse type containts for Moo
+MooX::MouseTypeConstraints - Mouse type constraints for Moo
 
 # SYNOPSIS
 
@@ -14,7 +14,7 @@ MooX::MouseTypeConstraints - Mouse type containts for Moo
 
 # DESCRIPTION
 
-MooX::MouseTypeConstraints provides [Mouse](https://metacpan.org/pod/Mouse) type containts support for [Moo](https://metacpan.org/pod/Moo).
+MooX::MouseTypeConstraints provides [Mouse](https://metacpan.org/pod/Mouse) type constraints support for [Moo](https://metacpan.org/pod/Moo).
 
 # LICENSE
 
