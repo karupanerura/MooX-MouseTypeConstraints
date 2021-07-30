@@ -14,17 +14,40 @@ eval {
         isa => 'Int',
     );
 };
-is $@, '', 'should not fail to declar';
+is $@, '', 'should not fail when declaring';
 
 eval {
-    Foo->new(bar => 1);
+    package Bar;
+
+    use Moo;
+    use MooX::MouseTypeConstraints;
+
+    has foo => (
+        is  => 'ro',
+        isa => 'Foo',
+    );
 };
-is $@, '', 'should not fail to construct';
+is $@, '', 'should works it again';
 
 eval {
-    Foo->new(bar => 'invalid');
+    my $foo = Foo->new(bar => 1);
+    my $bar = Bar->new(foo => $foo);
 };
-isnt $@, '', 'should fail to construct with invalid';
+is $@, '', 'should not fail  construct';
+
+eval {
+    my $foo = Foo->new(bar => 'invalid');
+    my $bar = Bar->new(foo => $foo);
+};
+isnt $@, '', 'should fail to construct with invalid Int';
+note $@;
+
+eval {
+    my $foo = Foo->new(bar => 1);
+    my $bar = Bar->new(foo => $foo);
+    Bar->new(foo => $bar);
+};
+isnt $@, '', 'should fail to construct with invalid Foo';
 note $@;
 
 done_testing;

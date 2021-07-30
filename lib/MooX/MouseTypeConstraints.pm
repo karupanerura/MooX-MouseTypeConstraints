@@ -15,7 +15,7 @@ sub import {
     my $code = sub {
         my ($name, %args) = @_;
         if (exists $args{isa} && !ref $args{isa}) {
-            my $type = Mouse::Util::TypeConstraints::find_type_constraint($args{isa});
+            my $type = Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint($args{isa});
             $args{isa} = sub {
                 die $type->get_message(@_) unless $type->check(@_);
             };
