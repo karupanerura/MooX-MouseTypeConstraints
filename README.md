@@ -1,3 +1,4 @@
+[![MetaCPAN Release](https://badge.fury.io/pl/MooX-MouseTypeConstraints.svg)](https://metacpan.org/release/MooX-MouseTypeConstraints) [![Actions Status](https://github.com/karupanerura/MooX-MouseTypeConstraints/workflows/test/badge.svg)](https://github.com/karupanerura/MooX-MouseTypeConstraints/actions)
 # NAME
 
 MooX::MouseTypeConstraints - Mouse type constraints for Moo

@@ -1,7 +1,6 @@
 name = "MooX-MouseTypeConstraints"
-# badges = ["travis-ci.com"]
+badges = ['metacpan', 'github-actions/test']
 authority="cpan:KARUPA"
 
 module_maker="ModuleBuildTiny"
 static_install = "auto"
-
