@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 
-eval {
+eval q{
     package Foo;
 
     use Moo;
@@ -16,7 +16,7 @@ eval {
 };
 is $@, '', 'should not fail when declaring';
 
-eval {
+eval q{
     package Bar;
 
     use MooX::MouseTypeConstraints;
@@ -28,6 +28,12 @@ eval {
     );
 };
 is $@, '', 'should works regardless of the order of "use"';
+
+eval q{
+    package Baz;
+    use MooX::MouseTypeConstraints;
+};
+isnt $@, '', 'should fail with non Moo based class';
 
 eval {
     my $foo = Foo->new(bar => 1);

@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 
-eval {
+eval q{
     package Foo;
 
     use Mouse::Util::TypeConstraints;

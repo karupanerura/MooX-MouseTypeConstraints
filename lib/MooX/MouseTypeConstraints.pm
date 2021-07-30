@@ -13,7 +13,8 @@ sub import {
     my $target = caller;
 
     on_scope_end {
-        my $has = $target->can('has');
+        my $has = $target->can('has')
+            or die q|Moo's internal DSL keyword `has` is not found. (perhaps you forgot to load "Moo"?)|;
         my $code = sub {
             my ($name, %args) = @_;
             if (exists $args{isa} && !ref $args{isa}) {
