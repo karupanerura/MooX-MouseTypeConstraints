@@ -18,9 +18,7 @@ sub import {
             my ($name, %args) = @_;
             if (exists $args{isa} && !ref $args{isa}) {
                 my $type = Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint($args{isa});
-                $args{isa} = sub {
-                    die $type->get_message(@_) unless $type->check(@_);
-                };
+                $args{isa} = _generate_isa($type);
             }
             @_ = ($name, %args);
             goto $has;
@@ -33,6 +31,19 @@ sub import {
             *{$glob} = $code;
         };
     };
+}
+
+sub _generate_isa {
+    my $type = shift;
+    if ($type->has_coercion) {
+        return sub {
+            die $type->get_message(@_) unless $type->check($type->coerce(@_));
+        };
+    } else {
+        return sub {
+            die $type->get_message(@_) unless $type->check(@_);
+        };
+    }
 }
 
 1;
