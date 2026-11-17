@@ -2,6 +2,12 @@ Revision history for Perl extension MooX-MouseTypeConstraints
 
 {{$NEXT}}
 
+    - Fix incorrect handling of coercions: values are no longer
+      validated against their coerced form while the original value
+      is stored. Coercions are now applied only when an attribute is
+      declared with `coerce => 1`, following Mouse semantics, and the
+      coerced value is what gets stored. (reported by haarg, #1)
+
 0.01 2021-07-30T04:13:58Z
 
     - original version
