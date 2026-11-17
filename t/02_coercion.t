@@ -26,6 +26,17 @@ eval q{
     use Moo;
 
     has foo => (
+        is     => 'ro',
+        isa    => 'Foo',
+        coerce => 1,
+    );
+
+    package Baz;
+
+    use MooX::MouseTypeConstraints;
+    use Moo;
+
+    has foo => (
         is  => 'ro',
         isa => 'Foo',
     );
@@ -38,11 +49,22 @@ eval {
 };
 is $@, '', 'should not fail to construct';
 
-eval {
-    my $bar = Bar->new(foo => 1);
-};
+my $bar = eval { Bar->new(foo => 1) };
 is $@, '', 'should not fail to construct with coerce target type';
+isa_ok $bar && $bar->foo, 'Foo', 'coerced value should be stored';
+is $bar && $bar->foo->bar, 1, 'coerced value should be built from the original value';
+
+eval {
+    my $baz = Baz->new(foo => 1);
+};
+isnt $@, '', 'should fail to construct with coerce target type without coerce => 1';
 note $@;
+
+eval {
+    my $foo = Foo->new(bar => 1);
+    my $baz = Baz->new(foo => $foo);
+};
+is $@, '', 'should not fail to construct without coerce => 1 with a valid value';
 
 eval {
     my $bar = Bar->new(foo => 'foo');

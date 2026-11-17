@@ -7,6 +7,7 @@ our $VERSION = "0.01";
 
 use B::Hooks::EndOfScope;
 use Mouse::Util::TypeConstraints ();
+use MooX::MouseTypeConstraints::Type ();
 
 sub import {
     my $class = shift;
@@ -36,15 +37,7 @@ sub import {
 
 sub _generate_isa {
     my $type = shift;
-    if ($type->has_coercion) {
-        return sub {
-            die $type->get_message(@_) unless $type->check($type->coerce(@_));
-        };
-    } else {
-        return sub {
-            die $type->get_message(@_) unless $type->check(@_);
-        };
-    }
+    return MooX::MouseTypeConstraints::Type->new(type => $type);
 }
 
 1;
@@ -69,6 +62,18 @@ MooX::MouseTypeConstraints - Mouse type constraints for Moo
 =head1 DESCRIPTION
 
 MooX::MouseTypeConstraints provides L<Mouse> type constraints support for L<Moo>.
+
+Coercions follow the same semantics as L<Mouse>: a coercion defined
+on a Mouse type constraint is only applied when the attribute is
+declared with C<coerce => 1>. Without it, a value must already
+satisfy the type constraint, even if it could be coerced into one
+that does.
+
+    has bar => (
+        is     => 'ro',
+        isa    => 'Foo', # a Mouse type with a coercion from Int
+        coerce => 1,     # Int values are coerced to Foo objects
+    );
 
 =head1 LICENSE
 
